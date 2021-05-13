@@ -1,0 +1,44 @@
+.homeHeader {
+  color: rgb(123, 160, 189)
+}
+
+h2 {
+  margin: 10px;
+}
+
+h4 {
+  margin: 10px;
+}
+
+h5 {
+  margin: 10px;
+}
+
+.welcome{
+  padding: 0;
+  margin: 0;
+  background-color: #d8ecf3;
+  box-shadow: 0px 0px 3px 3px lightblue;
+}
+
+.textBox{
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(16, 92, 116);
+}
+
+.home{
+  width: 50vw;
+  box-shadow: 2px 2px 3px 3px lightblue;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .home {
+    width: 80vw;
+  }
+}
