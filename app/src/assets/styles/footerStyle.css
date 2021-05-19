@@ -12,8 +12,8 @@
     font-weight: bold;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 5vh;
+    height: 35px;
     font-size: small;
     color: rgb(34, 80, 109);
+    line-height:35px;
 }

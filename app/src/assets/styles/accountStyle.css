@@ -1,0 +1,13 @@
+.container {
+    padding: 30px
+}
+
+.col {
+    box-shadow: 0px 0px 5px 1px lightblue;
+    margin: 5px;
+}
+
+.accountColumn1 {
+    height: 100%;
+    box-shadow: 0px 0px 5px 1px lightblue;
+}

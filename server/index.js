@@ -1,8 +1,10 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
-const randomstring = require("randomstring");
+const randomstring = require('randomstring');
 const nodeMailer = require("nodemailer");
 const { v4: uuidv4 } = require('uuid');
+const environment = require('./config');
+const authToken = require('./auth/authToken')
 
 const app = express();
 const port = 3000;
@@ -13,7 +15,7 @@ app.use(express.urlencoded({
 }));
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", `${environment.HOST}`);
   res.header("Access-Control-Allow-Headers", 
     "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -61,10 +63,43 @@ db.run(
   );
 `);
 
+db.run(
+  `
+  CREATE TABLE IF NOT EXISTS Users 
+  (
+    id VARCHAR(36) PRIMARY KEY,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
+    isActive INTEGER NOT NULL,
+    nickname VARCHAR(50) UNIQUE
+  );
+`);
+
 close_db(db);
 
 app.get('/', async (req, res) => {
   res.send(`Server listening at port ${port}!`);
+});
+
+
+app.post('/api/user/account', async (req, res) => {
+
+  db = open_db(sqlite3.OPEN_READONLY)
+
+  try {
+    var token = authToken.JWTdecode(req.body.id)
+
+    db.get(`SELECT * FROM Users WHERE id = '${token.id}'`, (err, row) => {
+      res.send({
+        "email": row.email,
+        "nickname": row.nickname
+      });
+    });
+  } catch (error) {
+    res.send(false)
+  }
+
+  close_db(db);
 });
 
 app.post('/api/auth/register', async (req, res) => {
@@ -78,6 +113,7 @@ app.post('/api/auth/register', async (req, res) => {
     } else {
 
       let userId = uuidv4();
+
       db.run(
         `INSERT INTO Users(id, email, password, isActive) 
         VALUES ('${userId}', '${req.body.email}', '${req.body.password}', 0)`
@@ -118,7 +154,12 @@ app.post('/api/auth/login', async (req, res) => {
   db.get(`SELECT * FROM Users WHERE email = '${req.body.email}'`, (err, row) => {
     if (row && row.email == req.body.email && row.password == req.body.password)
     {
-      res.send(true);
+      var token = authToken.JWTencode({id: `${row.id}`})
+
+      res.send({
+        "status": true,
+        "token": token
+      });
     } else {
       res.send(false);
     }

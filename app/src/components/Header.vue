@@ -50,8 +50,8 @@
           transition: 'zoom', position: 'bottom-center'
         });
 
-        this.$cookie.removeCookie('isAuthenticated')
-        this.$store.commit('authenticate')
+        this.$store.commit('logout')
+        
         router.push('/login')
       }
     }

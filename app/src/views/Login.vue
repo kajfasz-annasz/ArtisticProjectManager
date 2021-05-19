@@ -43,6 +43,12 @@
           <i class="fa fa-sign-in signInIcon" aria-hidden="true"></i>
         </button>
 
+        <div class="checkboxWrapper">
+          <input type="checkbox" name="checkbox" id="checkbox" class="checkbox"
+          v-model="v$.userForm.rememberMe">
+          <label class="checkboxLabel" for="checkbox">Remember me?</label>
+        </div>
+
         <p class="credentialsLink">
           Don't have an account? 
           <router-link to="/register">Register!</router-link>
@@ -78,6 +84,7 @@
         userForm:{
           email: '',
           password: '',
+          rememberMe: ''
         }
       }
     },
@@ -100,7 +107,9 @@
       async login() {
         const requestOptions = {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             email: this.v$.userForm.email.$model,
             password: btoa(this.v$.userForm.password.$model)
@@ -114,16 +123,20 @@
               const error = (result && result.message) || response.status
               return Promise.reject(error)
             } else {
-              if(result)
+              if(result.status)
               {
                 this.$moshaToast('Succesfully logged in!', {
                   timeout: 3000, type: 'success', showCloseButton: true, showIcon: true,
                   transition: 'zoom', position: 'bottom-center'
                 })
 
-                this.$cookie.setCookie('isAuthenticated', true)
-                this.$store.commit('authenticate')
-
+                if(this.v$.userForm.rememberMe)
+                {
+                  this.$store.commit('rememberLogin', result.token)
+                } else {
+                  this.$store.commit('notRememberLogin', result.token)
+                }
+                
                 router.push('/dashboard')
               } else {
                 this.shaker("emailBox");
