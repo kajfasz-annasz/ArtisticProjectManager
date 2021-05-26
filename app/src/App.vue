@@ -5,7 +5,7 @@
 
 <style>
   @import './assets/styles/mainAppStyle.css';
-  @import './assets/styles/zoom.css';
+  @import './assets/styles/modal.css';
 </style>
 
 <script>

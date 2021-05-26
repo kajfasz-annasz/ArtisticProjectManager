@@ -18,7 +18,7 @@
         <div id="email">
           <div id="emailBox" class="wrapper">
             <input v-model="v$.userForm.email.$model" placeholder="Your Email Address" 
-            type="email" :class="{ error: v$.userForm.email.$error }" id="inputEmail"
+            type="text" :class="{ error: v$.userForm.email.$error }" id="inputEmail"
               @blur="v$.userForm.email.$touch">
             <label for="wrapper" class="fa fa-envelope-o inputIcon"/>
           </div>

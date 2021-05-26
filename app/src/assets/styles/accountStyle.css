@@ -1,13 +1,385 @@
-.container {
-    padding: 30px
+input:invalid, .acc-invalid {
+    box-shadow: 2px 2px 5px rgb(187, 16, 16) !important;
+    background-color: rgb(253, 229, 229) !important;
 }
 
-.col {
-    box-shadow: 0px 0px 5px 1px lightblue;
-    margin: 5px;
+.acc-button-change-details:disabled, .acc-button-save:disabled {
+    background-color: grey;
+    color: whitesmoke;
+    transition: 0.25s;
+    pointer-events: none;
+    opacity: 0.3;
 }
 
-.accountColumn1 {
+.acc-button-delete-account {
+    margin-top: 15px;
+    padding: 5px;
+    background-color: red;
+    box-shadow: 2px 2px 5px rgb(56, 119, 139);
+    border: 0;
+    border-radius: 40px 40px 10px 10px;
+    width: 150px;
+    height: 50px;
+    transition: 0.5s;
+    font-weight: bold;
+    color: whitesmoke
+}
+
+.acc-button-delete-account:hover {
+    background-color: orange;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.acc-warning {
+    padding-top: 10px;
+    color: red;
+    font-weight: bold;
+    margin: 0px;
+}
+
+.acc-form-center {
+    margin-top: 15%;
+}
+
+.custom-select {
+    border: unset;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px 2px lightblue;
+}
+
+.custom-select:focus {
+    border: unset;
+}
+
+.acc-settings {
+    display: flex;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.acc-settings-name {
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.acc-sm-col-1 {
+    margin-left: 12px;
+    margin-right: 12px;
+    padding: 0px;
+}
+
+.acc-sm-col-2 {
+    margin-right: 12px;
+    padding: 0px;
+}
+
+.acc-icons {
+    height: 38px;
+    width: 38px;
+    line-height: 30px;
+    border-radius: 5px;
+    font-size: 30px;
+    padding-top: 5px;
+}
+
+.fa-skype {
+    background: #00aff0;
+    color: white;
+  }
+
+.fa-instagram {
+    display: inline-block;
+    color: #fff;
+    vertical-align: middle;
+    background: #d6249f;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+  }
+
+.fa-snapchat-ghost {
+    background: #fffc00;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+  }
+
+.fa-github {
+    background: #77119c;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}
+
+.acc-sm-logo-div {
+    border-right: 2px solid;
+    border-color: inherit;
+    width: 60px;
+    padding-top: 5px;
+    background-color: white;
+}
+
+.acc-social-media-value {
+    font-size: 15px;
+    font-family: italic;
+    background-color: inherit;
+    width: 100%;
+    border: unset;
+    padding-left: 10px;
+    background-color: white;
+}
+
+.acc-social-media-value:disabled {
+    background-color: whitesmoke;
+}
+
+.acc-social-media {
+    background-color: rgb(247, 253, 255);
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    background-color: whitesmoke;
+}
+
+.acc-button-change-details {
+    margin-right: 50px;
+}
+
+.acc-button-change-details, .acc-button-save {
+    margin-top: 15px;
+    padding: 5px;
+    background-color: lightblue;
+    box-shadow: 2px 2px 5px rgb(56, 119, 139);
+    border: 0;
+    border-radius: 15px;
+    width: 100px;
+    height: 40px;
+    transition: 0.5s;
+    font-weight: bold;
+    color: rgb(34, 80, 109);
+}
+
+.acc-column-header {
+    padding-top: 10px;
+    border-bottom: 2px solid;
+    border-color: rgb(56, 119, 139);
+    font-size: 19px;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.acc-details {
+    display: flex;
+}
+
+.acc-details-name {
+    margin: auto;
+    margin-top: 10px;
+    width: 50%;
+    margin-right: 10px;
+    box-shadow: 2px 2px 5px rgb(56, 119, 139);
+    font-size: 15px;
+    height: 30px;
+    text-align: left;
+    padding-left: 15px;
+    line-height: 30px;
+    background-color: rgb(247, 253, 255);
+}
+
+.acc-details-value {
+    margin-top: 10px;
+    width: 50%;
+    margin-left: 10px;
+    box-shadow: 2px 2px 5px rgb(56, 119, 139);
+    border: unset;
+    font-size: 15px;
+    padding-left: 15px;
+    background-color: white;
+}
+
+.acc-details-value:disabled {
+    background-color: whitesmoke;
+}
+
+.acc-button-avatar {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: lightblue;
+    box-shadow: 2px 2px 5px rgb(56, 119, 139);
+    border: 0;
+    border-radius: 10px 10px 40px 40px;
+    width: 150px;
+    height: 50px;
+    transition: 0.5s;
+    font-weight: bold;
+    color: rgb(34, 80, 109);
+}
+
+.acc-button-avatar:hover, .acc-button-change-details:hover, .acc-button-save:hover {
+    background-color: lightgreen;
+    border: 0;
+    color: dimgray;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.acc-location-text {
+    font-size: 17px;
+    margin: 0px;
+}
+
+.acc-location-icon {
+    height: 25px;
+    width: 15px;
+    margin-right: 5px;
+}
+
+.acc-location {
+    padding-top: 5px;
+    font-size: 25px;
+}
+
+.acc-next-to {
+    display: flex;
+    justify-content: center;
+}
+
+.acc-username {
+    padding-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+    margin-bottom: 0px;
+}
+
+.acc-avatar {
+    font-size: 200px;
+    color: rgb(34, 80, 109);
+}
+
+.container-fluid {
+    padding: 30px;
+}
+
+.acc-col-style {
+    box-shadow: 0px 0px 5px 5px lightblue;
     height: 100%;
-    box-shadow: 0px 0px 5px 1px lightblue;
+    height: auto;
+}
+
+.row {
+    max-width: 960px;
+}
+
+.acc-col-1 {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: white;
+}
+
+.acc-col-2 {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    background-color: white;
+}
+
+.acc-col-3 {
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: white;
+    padding-bottom: 15px;
+}
+
+.acc-col-4 {
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: white;
+}
+
+@media screen and (min-width: 961px) {
+    .row {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .acc-col-1 {
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+    
+    .acc-col-2 {
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+    
+    .acc-col-3 {
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+    
+    .acc-col-4 {
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-top: 0px;
+        padding-bottom: 25px;
+    }
+
+    .acc-sm-col-1 {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    
+    .acc-sm-col-2 {
+        margin-right: 0px;
+    }
+
+    .card {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .acc-form-center {
+        margin-top: 0;
+    }
+
+    .acc-details-value {
+        font-size: 12px !important;
+    }
+
+    .acc-details-name {
+        font-size: 12px !important;
+    }
 }

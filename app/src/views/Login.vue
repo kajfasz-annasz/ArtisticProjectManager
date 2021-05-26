@@ -11,7 +11,7 @@
 
         <div id="email">
           <div id="emailBox" class="wrapper">
-            <input v-model="v$.userForm.email.$model" placeholder="Email" type="email"
+            <input v-model="v$.userForm.email.$model" placeholder="Email" type="text"
               :class="{ error: v$.userForm.email.$error }" id="inputEmail"
               @blur="v$.userForm.email.$touch"
               @keyup.enter="!v$.userForm.$invalid ? login() : touchInputs()">

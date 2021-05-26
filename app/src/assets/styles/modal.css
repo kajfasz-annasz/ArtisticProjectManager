@@ -1,0 +1,76 @@
+.my-modal-header-arrow {
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.my-modal-header-icon {
+    font-size: 35px;
+    padding-right: 10px;
+}
+
+.my-modal-header {
+    background-color: rgb(10, 114, 233);
+    color: whitesmoke;
+    border-bottom: inherit;
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 15px;
+    height: 45px;
+    text-align: left;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.my-modal-body {
+    height: 60%;
+    font-size: 15px;
+    padding: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.my-modal-body-input {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.my-modal-footer {
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px auto;
+    width: 300px;
+}
+
+.my-modal {
+    position: absolute;
+    top: calc(50% - 150px);
+    width: 500px;
+    background-color: white;
+    box-shadow: 2px 2px 3px 1px rgb(82, 78, 78);
+    border: 2px solid rgb(5, 36, 71);
+}
+
+.my-modal-blur {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    backdrop-filter: blur(5px) brightness(50%) sepia(50%);
+    transition:visibility 1s;
+}
+
+@media screen and (max-width: 767px) {
+    .my-modal {
+        width: 90%;
+    }
+}

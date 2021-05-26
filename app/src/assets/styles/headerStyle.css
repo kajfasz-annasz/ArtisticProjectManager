@@ -26,7 +26,6 @@
 }
 
 .navbox {
-    display: flex;
     width: 350px;
     display: flex;
     justify-content: space-evenly;
@@ -44,6 +43,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 1 !important;
   }
   
 #nav a {

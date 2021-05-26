@@ -5,13 +5,7 @@
             <router-link to="/">Home</router-link> |
             <router-link to="/about">About</router-link> |
             <router-link to="/account">Account</router-link> |
-            <router-link to="/dashboard">Dashboard</router-link> |
-            <form action="/action_page.php">
-              <select class="language">
-                <option value="EN">EN</option>
-                <option value="PL">PL</option>
-              </select>
-            </form> | 
+            <router-link to="/dashboard">Dashboard</router-link> | 
             <button v-on:click="logout()" class="logOut">
               <i class="fa fa-sign-out"></i>
             </button>

@@ -59,28 +59,184 @@ db.run(
     email VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(50) NOT NULL,
     isActive INTEGER NOT NULL,
-    nickname VARCHAR(50) UNIQUE
+    nickname VARCHAR(20) UNIQUE,
+    city VARCHAR(20),
+    country VARCHAR(30),
+    facebook VARCHAR(20),
+    twitter VARCHAR(20),
+    github VARCHAR(20),
+    linkedin VARCHAR(20),
+    snapchat VARCHAR(20),
+    youtube VARCHAR(20),
+    instagram VARCHAR(20),
+    skype VARCHAR(20)
   );
 `);
-
-db.run(
-  `
-  CREATE TABLE IF NOT EXISTS Users 
-  (
-    id VARCHAR(36) PRIMARY KEY,
-    email VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(50) NOT NULL,
-    isActive INTEGER NOT NULL,
-    nickname VARCHAR(50) UNIQUE
-  );
-`);
-
 close_db(db);
 
 app.get('/', async (req, res) => {
   res.send(`Server listening at port ${port}!`);
 });
 
+app.post('/api/user/account/delete', async (req, res) => {
+
+  db = open_db(sqlite3.OPEN_READWRITE)
+
+  try {
+    var token = authToken.JWTdecode(req.body.id)
+
+    db.get(`SELECT * FROM Users WHERE id = '${token.id}'`, (err, row) => {
+      if (row.password == req.body.password)
+      {
+        query = `
+          DELETE FROM Users
+          WHERE id = '${token.id}'
+        `;
+
+        res.send({status: true});
+      }
+      else {
+        res.send({status: 'wrongPassword'});
+      }
+    });
+
+  } catch (error) {
+    res.send({status: false});;
+  }
+
+  close_db(db);
+});
+
+app.post('/api/user/account/details', async (req, res) => {
+
+  db = open_db(sqlite3.OPEN_READWRITE)
+
+  const values = ['nickname', 'email', 'city', 'country']
+
+  try {
+    var token = authToken.JWTdecode(req.body.id);
+
+    db.get(`SELECT * FROM Users WHERE email = '${req.body.email}'`, (err, row) => {
+      if (row && req.body.email == row.email && token.id != row.id)
+      {
+        res.send({status: 'emailExist'});
+        return;
+      } else {
+        db.get(`SELECT * FROM Users WHERE nickname = '${req.body.nickname}'`, (err, row) => {
+          if (row && req.body.nickname == row.nickname && token.id != row.id)
+          {
+            res.send({status: 'nicknameExist'});
+            return;
+          } else {
+            db.get(`SELECT * FROM Users WHERE id = '${token.id}'`, (err, row) => {
+              if (req.body.passwordChange == false) {
+                for (var index = 0; index < values.length; index++) {
+    
+                  var queryEmpty = `
+                    UPDATE Users
+                    SET ${values[index]} = null 
+                    WHERE id = '${token.id}'
+                  `;
+    
+                  var query = `
+                    UPDATE Users
+                    SET ${values[index]} = '${req.body[values[index]]}'
+                    WHERE id = '${token.id}'
+                  `;
+    
+                  if (req.body[values[index]] == "") {
+                    db.run(queryEmpty);
+                  } else {
+                    db.run(query);
+                  }
+                }
+                res.send({status: true})
+              } else {
+                if (req.body.oldPassword != row.password)
+                {
+                  res.send({status: 'wrongPassword'})
+                } else {
+                  for (var index = 0; index < values.length; index++) {
+    
+                    var queryEmpty = `
+                      UPDATE Users
+                      SET ${values[index]} = null 
+                      WHERE id = '${token.id}'
+                    `;
+      
+                    var query = `
+                      UPDATE Users
+                      SET ${values[index]} = '${req.body[values[index]]}'
+                      WHERE id = '${token.id}'
+                    `;
+      
+                    if (req.body[values[index]] == "") {
+                      db.run(queryEmpty);
+                    } else {
+                      db.run(query);
+                    }
+                  }
+    
+                  db.run(`
+                    UPDATE Users
+                    SET password = '${req.body.newPassword}'
+                    WHERE id = '${token.id}'
+                  `);
+    
+                  res.send({status: true})
+                } 
+              }
+            });
+          }
+        });
+      }
+    });
+
+  } catch (error) {
+    res.send(false);
+  }
+
+  close_db(db);
+});
+
+app.post('/api/user/account/socialmedia', async (req, res) => {
+
+  db = open_db(sqlite3.OPEN_READWRITE)
+
+  try {
+    var token = authToken.JWTdecode(req.body.id)
+
+    var values = ['facebook', 'twitter', 'github', 
+            'linkedin', 'snapchat', 'youtube', 'instagram', 'skype']
+
+    for (var index = 0; index < values.length; index++) {
+
+      var updateSocialMediaEmpty = `
+        UPDATE Users
+        SET ${values[index]} = null 
+        WHERE id = '${token.id}'
+      `;
+
+      var updateSocialMedia = `
+        UPDATE Users 
+        SET ${values[index]} = '${req.body[values[index]]}'
+        WHERE id = '${token.id}'
+      `;
+
+      if (req.body[values[index]] == "") {
+        db.run(updateSocialMediaEmpty);
+      } else {
+        db.run(updateSocialMedia);
+      }
+    }
+
+    res.send(true);
+  } catch (error) {
+    res.send(false)
+  }
+
+  close_db(db);
+});
 
 app.post('/api/user/account', async (req, res) => {
 
@@ -92,7 +248,17 @@ app.post('/api/user/account', async (req, res) => {
     db.get(`SELECT * FROM Users WHERE id = '${token.id}'`, (err, row) => {
       res.send({
         "email": row.email,
-        "nickname": row.nickname
+        "nickname": row.nickname,
+        "city": row.city,
+        "country": row.country,
+        "facebook": row.facebook,
+        "twitter": row.twitter,
+        "github": row.github,
+        "linkedin": row.linkedin,
+        "snapchat": row.snapchat,
+        "youtube": row.youtube,
+        "instagram": row.instagram,
+        "skype": row.skype
       });
     });
   } catch (error) {
@@ -117,7 +283,7 @@ app.post('/api/auth/register', async (req, res) => {
       db.run(
         `INSERT INTO Users(id, email, password, isActive) 
         VALUES ('${userId}', '${req.body.email}', '${req.body.password}', 0)`
-      )
+      );
 
       let mailOptions = 
       {

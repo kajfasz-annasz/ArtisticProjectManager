@@ -12,7 +12,7 @@
           
           <div id="email">
             <div id="emailBox" class="wrapper">
-              <input v-model="v$.userForm.email.$model" placeholder="Email" type="email"
+              <input v-model="v$.userForm.email.$model" placeholder="Email" type="text"
                 :class="{ error: v$.userForm.email.$error }" id="inputEmail"
                 @blur="v$.userForm.email.$touch"
                 @keyup.enter="!v$.userForm.$invalid ? register() : touchInputs()">
@@ -27,7 +27,7 @@
           <div id="confirmEmail">
             <div id="confirmEmailBox" class="wrapper">
               <input v-model="v$.userForm.confirmEmail.$model" placeholder="Confirm Email" 
-                type="email" :class="{ error: v$.userForm.confirmEmail.$error }" 
+                type="text" :class="{ error: v$.userForm.confirmEmail.$error }" 
                 id="inputConfirmEmail" autocomplete="new-password"
                 @blur="v$.userForm.confirmEmail.$touch"
                 @keyup.enter="!v$.userForm.$invalid ? register() : touchInputs()">
@@ -98,7 +98,8 @@
     helpers, 
     sameAs, 
     minLength,
-    requiredUnless, 
+    requiredUnless,
+    maxLength
   } from '@vuelidate/validators'
     import { environment } from '../../config.js'
 
@@ -135,6 +136,8 @@
             required: helpers.withMessage('This field cannot be empty!', required),
             minLength: helpers.withMessage(
               'Password must contain at least 6 characters!', minLength(6)),
+            maxLength: helpers.withMessage(
+              'Maximal characters number for password is 30!', maxLength(30)),
           },
           confirmPassword: { 
             requiredUnless: helpers.withMessage('This field cannot be empty!', 
