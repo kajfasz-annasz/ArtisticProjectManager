@@ -1,5 +1,16 @@
 # Artistic Project Manager
 
+### Opis aplikacji
+
+Fragment aplikacji **Artistic Project Manager** stworzonej przy użyciu Vue3, JavaScript, CSS,
+
+Repozytorium zawiera projekt z następującymi elementami:
+
+* Podstawe podstrony: Home, About, 
+* Logowanie i rejestracja
+* Komunikacja mailowa (potwierdzenie rejestracji, zmiana hasła itp.)
+* Prototyp **Panelu Użytkownika**
+
 ### Uruchamianie aplikacji
 
 Aby uruchomić aplikację należy w odpowiedniej lokalizacji w wierszu poleceń (lokalizacja folderów **app** i **server**) wpisać następujące komendy:
@@ -15,7 +26,7 @@ w wierszu poleceń w odpowiedniej ścieżce (**app** i **server**) przed próbą
 
 Aby aplikacja i serwer działały poprawnie należy w plikach 
 ```config.js```
-w folderze **app** i **server** zmienić podany adres IP na właśne lokalne IP.
+w folderze **app** i **server** zmienić podany adres IP na własne lokalne IP.
 
 ### Baza danych
 
