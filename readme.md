@@ -32,3 +32,25 @@ w folderze **app** i **server** zmienić podany adres IP na własne lokalne IP.
 
 Baza danych tworzona jest automatycznie w momencie rozruchu serwera (jeżeli nie istnieje).
 Baza danych znajduje się w folderze **server**.
+
+### Prezentacja aplikacji
+
+* Strona główna aplikacji
+
+![img_1](Images/scr_1.png)
+
+* Panele logowania i rejestracji
+
+![img_2](Images/scr_2.png)
+
+* Menu przypominania hasła przez adres email
+
+![img_3](Images/scr_3.png)
+
+* Panel użytkownika
+
+![img_4](Images/scr_4.png)
+
+* Widok mobilny aplikacji
+
+![img_5](Images/scr_5.png)
